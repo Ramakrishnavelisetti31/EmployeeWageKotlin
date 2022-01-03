@@ -5,26 +5,46 @@ fun main(args: Array<String>) {
     val employee = Employee()
     val isFullTime = 1
     val isPartTime = 2
-    val wagePerHour = 20
-    println(employee.checkDailyWage(isFullTime, isPartTime, wagePerHour))
+    println(employee.employeeWage(isFullTime, isPartTime, 20, 20))
 }
 
-class Employee {
-    private fun randNumber( isFullTime: Int, isPartTime: Int): Int {
+class Employee() {
+     private fun randNumber(isFullTime: Int, isPartTime: Int,): Int {
         return (isFullTime..isPartTime).random()
     }
 
-    fun checkDailyWage( isFullTime: Int, isPartTime: Int, wagePerHour: Int) {
-        val dailyHours: Int
-        when (randNumber(isFullTime, isPartTime)) {
-            1 -> println("Employee is Present for Full Time\nThe Employee Wage is ${calculateWage(wagePerHour, 8)}")
-            2 -> println("Employee is Present for Part Time\nThe Employee Wage is ${calculateWage(wagePerHour, 4)}")
-            else -> println("Employee is Absent\nThe Employee Wage is ${calculateWage(wagePerHour, 0)}")
-        }
-    }
+     fun employeeWage(isFullTime: Int, isPartTime: Int, wagePerHour: Int, noOfDays: Int) {
+         var day = 1
+         var dailyWage = 0
+         var monthlyWage = 0
+         while (day <= noOfDays) {
+             when (randNumber(isFullTime, isPartTime)) {
+                 1 -> {
+                     println("Employee is Present for Full Time")
+                     dailyWage = calculateWage(wagePerHour, 8)
+                     monthlyWage += dailyWage
+                     println("Employee Wage for $day is $dailyWage")
+                 }
+                 2 -> {
+                     println("Employee is Present for Part Time")
+                     dailyWage = calculateWage(wagePerHour, 4)
+                     monthlyWage += dailyWage
+                     println("Employee Wage for $day is $dailyWage")
+                 }
+                 else -> {
+                     println("Employee is Absent")
+                     dailyWage = calculateWage(wagePerHour,0)
+                     monthlyWage += dailyWage
+                     println("Employee Wage for $day is $dailyWage")
+                 }
+             }
+             day +=1
+         }
+         println("The Total wage of Employee for a Month is $monthlyWage")
+     }
 
     private fun calculateWage(wagePerHour: Int, dailyHours: Int): Int {
-        val dailyWage = wagePerHour * dailyHours
-        return (dailyWage)
-    }
-}
+         val dailyWage = wagePerHour * dailyHours
+         return (dailyWage)
+     }
+ }
