@@ -15,23 +15,16 @@ class Employee {
     }
 
     fun checkDailyWage( isFullTime: Int, isPartTime: Int, wagePerHour: Int) {
-        if (randNumber(isFullTime, isPartTime) == 1) {
-            val dailyHours = 8
-            println("Employee is Present for Full Time")
-            println("The Employee Wage is ${calculateWage(wagePerHour, dailyHours)}")
-        } else if(randNumber(isFullTime, isPartTime) == 2){
-            val dailyHours = 4
-            println("Employee is Present for Part Time")
-            println("The Employee Wage is ${calculateWage(wagePerHour, dailyHours)}")
-        } else {
-            val dailyHours = 0
-            println("Employee is Absent")
-            println("The Employee Wage is ${calculateWage(wagePerHour, dailyHours)}")
+        val dailyHours: Int
+        when (randNumber(isFullTime, isPartTime)) {
+            1 -> println("Employee is Present for Full Time\nThe Employee Wage is ${calculateWage(wagePerHour, 8)}")
+            2 -> println("Employee is Present for Part Time\nThe Employee Wage is ${calculateWage(wagePerHour, 4)}")
+            else -> println("Employee is Absent\nThe Employee Wage is ${calculateWage(wagePerHour, 0)}")
         }
     }
 
-    private fun calculateWage(wage_per_hour: Int, dailyHours: Int): Int {
-        val dailyWage = wage_per_hour * dailyHours
+    private fun calculateWage(wagePerHour: Int, dailyHours: Int): Int {
+        val dailyWage = wagePerHour * dailyHours
         return (dailyWage)
     }
 }
